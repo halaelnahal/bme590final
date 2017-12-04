@@ -99,3 +99,11 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# miscellaneous
+.idea/*
+__pycache__/*
+*.pyc
+.cache/*
+docs/_build/*
+tests/__pychache__/*
