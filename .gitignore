@@ -107,3 +107,4 @@ __pycache__/*
 .cache/*
 docs/_build/*
 tests/__pychache__/*
+bme590final/
