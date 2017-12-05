@@ -1,17 +1,13 @@
 {
-  "name": "image-handler",
+  "name": "my-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@navjobs/upload": "^3.1.2",
     "axios": "^0.17.1",
-    "material-ui": "^0.20.0",
+    "material-ui": "^0.19.4",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-dropzone": "^4.2.3",
-    "react-dropzone-component": "^3.0.0",
-    "react-scripts": "1.0.17",
-    "superagent": "^3.8.1"
+    "react-scripts": "1.0.17"
   },
   "scripts": {
     "start": "react-scripts start",
