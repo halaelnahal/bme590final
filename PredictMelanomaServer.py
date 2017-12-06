@@ -51,3 +51,15 @@ def test_sample():
         output = {"Results": "Not received."}
 
     return jsonify(output)
+
+
+@app.route("/melanoma/prediction", methods=['POST'])
+def melanoma_prediction():
+    from get_prediction import get_prediction
+    img = request.json["currentImageString"]
+    # need to validate image
+    (labels, predictions) = get_prediction(img)
+    output = {}
+    for i in range(len(labels)):
+        output[labels[i]] = predictions[i]
+    return jsonify(output)
