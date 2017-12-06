@@ -5,16 +5,16 @@ get_prediction module written provided by Suyash Kumar for predictions.
 
 GET routes:
 
-/test/server:
+/server:
     output: string confirmation "Server is up and running!"
 
 POST routes:
 
-/test/decode/base_64:
+/decode/base_64:
     input: sample base 64 string "aGVsbG8sIHdvcmxk"
     output: returns decoded string "hello, world"
 
-/test/sample_image:
+/sample_image:
     input: sample image transformed into base 64
     output: "Received!" or "Not received."
 
@@ -23,12 +23,31 @@ POST routes:
     output: melanoma prediction
 """
 
-
-def main():
-    from base64 import b64encode, b64decode
-
-    print b64encode('hello, world')
+from flask import Flask, request, jsonify
+app = Flask(__name__)
+req_num = 0
 
 
-if __name__ == '__main__':
-    main()
+@app.route("/server")
+def test_server():
+    output = {"Results": "Server is up and running!"}
+    return jsonify(output)
+
+
+@app.route("/decode/base_64", methods=['POST'])
+def test_base_64():
+    from base64 import b64decode
+    b64text = request.json["sample"]
+    text = b64decode(b64text)
+    output = {"Results": text}
+    return jsonify(output)
+
+
+@app.route("/sample_image", methods=['POST'])
+def test_sample():
+    if request.json["currentImageString"] != '':
+        output = {"Results": "Received!"}
+    else:
+        output = {"Results": "Not received."}
+
+    return jsonify(output)
