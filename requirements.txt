@@ -7,5 +7,3 @@ ipython
 tensorflow
 flask-cors
 numpy
-cv2
-PIL
