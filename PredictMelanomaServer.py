@@ -65,27 +65,19 @@ def test_sample():
 @app.route("/melanoma/prediction", methods=['POST'])
 def melanoma_prediction():
     from get_prediction import get_prediction
-
-
-    import base64
-    import numpy as np
-    import matplotlib.image as mpimg
-
+    from base64 import b64decode
+    from matplotlib.image import imread
 
     b64img_string = request.json["currentImageString"]
-
-
-
-
-    imgdata = base64.b64decode(b64img_string)
-    print type(imgdata)
+    imgdata = b64decode(b64img_string)
+    return type(imgdata)
     
 
     with open("temp.jpg", "wb") as image_out:
         image_out.write(imgdata)
 
 
-    img = mpimg.imread("./temp.jpg")
+    img = imread("./temp.jpg")
 
 
 
