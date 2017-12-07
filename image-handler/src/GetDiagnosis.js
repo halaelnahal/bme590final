@@ -9,7 +9,7 @@ class GetDiagnosis extends Component{
     }
 
     getData = () => {
-        axios.get('http://melanoma/prediction').then( (data) => {
+        axios.get('http://vcm-1855.vm.duke.edu:8000/melanoma/prediction').then( (data) => {
             console.log(data);
             console.log("Prediction:")
             console.log(data.data)
