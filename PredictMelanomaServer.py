@@ -25,6 +25,11 @@ POST routes:
 
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+import io
+import cv2
+import base64
+import numpy as np
+from PIL import Image
 app = Flask(__name__)
 CORS(app)
 req_num = 0
@@ -69,14 +74,25 @@ def melanoma_prediction():
     import numpy as np
     import matplotlib.image as mpimg
     b64img_string = request.json["currentImageString"]
-    imgdata = base64.b64decode(b64img_string)
-    #img = mpimg.imread(imgdata)
+    #imgdata = base64.b64decode(b64img_string)
+    img = mpimg.imread(stringToImage(b64img_string))
     '''
     r = base64.decodestring(img_string)
     img = np.frombuffer(r, dtype=np.float64)
     '''
-    (labels, predictions) = get_prediction(imgdata)
+    (labels, predictions) = get_prediction(img)
     output = {}
     for i in range(len(labels)):
         output[labels[i]] = predictions[i]
     return jsonify(output)
+
+
+
+# Take in base64 string and return PIL image
+def stringToImage(base64_string):
+    imgdata = base64.b64decode(base64_string)
+    return Image.open(io.BytesIO(imgdata))
+
+# convert PIL Image to an RGB image( technically a numpy array ) that's compatible with opencv
+def toRGB(image):
+    return cv2.cvtColor(np.array(image), cv2.COLOR_BGR2RGB)
