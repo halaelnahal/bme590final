@@ -6,3 +6,4 @@ pytest-cov
 ipython
 tensorflow
 flask-cors
+numpy

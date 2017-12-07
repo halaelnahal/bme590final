@@ -29,6 +29,15 @@ app = Flask(__name__)
 CORS(app)
 req_num = 0
 
+# error codes
+def send_error(message, code):
+    err = {
+        "error": message
+    }
+    return jsonify(err), code
+
+def valid(img):
+    img.shap
 
 @app.route("/server")
 def test_server():
@@ -58,8 +67,11 @@ def test_sample():
 @app.route("/melanoma/prediction", methods=['POST'])
 def melanoma_prediction():
     from get_prediction import get_prediction
-    img = request.json["currentImageString"]
-    # need to validate image
+    import base64
+    import numpy as np
+    img_string = request.json["currentImageString"]
+    r = base64.decodestring(img_string)
+    img = np.frombuffer(r, dtype=np.float64)
     (labels, predictions) = get_prediction(img)
     output = {}
     for i in range(len(labels)):
