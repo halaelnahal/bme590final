@@ -69,7 +69,9 @@ def melanoma_prediction():
     import numpy as np
     img_string = request.json["currentImageString"]
     r = base64.decodestring(img_string)
-    img = np.fromstring(r, dtype=np.float64)
+    print type(r)
+    print r.shape
+    img = np.frombuffer(r, dtype=np.float64)
     (labels, predictions) = get_prediction(img)
     output = {}
     for i in range(len(labels)):
