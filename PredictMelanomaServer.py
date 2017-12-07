@@ -35,9 +35,9 @@ def send_error(message, code):
         "error": message
     }
     return jsonify(err), code
-
+'''
 def valid(img):
-    img.shap
+    img.shap'''
 
 @app.route("/server")
 def test_server():
@@ -65,6 +65,7 @@ def test_sample():
 
 
 @app.route("/melanoma/prediction", methods=['POST'])
+@cross_origin()
 def melanoma_prediction():
     from get_prediction import get_prediction
     import base64
