@@ -78,7 +78,10 @@ def melanoma_prediction():
 
 
     imgdata = base64.b64decode(b64img_string)
-    img = mpimg.imread(imgdata)
+    with open("temp.jpg", "wb") as image_out:
+        image_out.write(imgdata)
+    print image_out
+    img = mpimg.imread("temp.jpg")
 
 
 
