@@ -65,26 +65,16 @@ def test_sample():
 @app.route("/melanoma/prediction", methods=['POST'])
 def melanoma_prediction():
     from get_prediction import get_prediction
-    from base64 import b64decode
+    from base64 import decodestring
     from matplotlib.image import imread
 
     b64img_string = request.json["currentImageString"]
-    imgdata = b64decode(b64img_string)
-    return type(imgdata)
-    
-
-    with open("temp.jpg", "wb") as image_out:
+    imgdata = decodestring(b64img_string)
+    filename = "temp.jpg"
+    with open(filename, "wb") as image_out:
         image_out.write(imgdata)
-
-
-    img = imread("./temp.jpg")
-
-
-
-
+    img = imread(filename)
     (labels, predictions) = get_prediction(img)
-    output = {}
-    for i in range(len(labels)):
-        output[labels[i]] = predictions[i]
-    return jsonify(output)
-
+    results = {"type": str(type(img)), "shape": str(img.shape),
+               "labels": str(labels), "predictions": str(predictions)}
+    return jsonify(results)
