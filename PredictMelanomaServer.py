@@ -68,7 +68,9 @@ def melanoma_prediction():
     from base64 import decodestring
     from matplotlib.image import imread
 
-    b64img_string = request.json["currentImageString"]
+    raw_string = request.json["currentImageString"]
+    start_index = raw_string.find(",") + 1
+    b64img_string = raw_string[start_index:]
     imgdata = decodestring(b64img_string)
     filename = "temp.jpg"
     with open(filename, "wb") as image_out:
