@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import darkBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
-import {deepOrange500, orange500, white, red200, red400} from 'material-ui/styles/colors';
-import Upload from './Upload';
-import Prediction from './PredictionComponent'
-import PaperExampleCircle from './paper';
+import {indigo900, indigo400, white, red200, red400, red500, teal900, teal500} from 'material-ui/styles/colors';
+import Upload from './Components/Upload';
+import Prediction from './Components/Prediction'
+import PaperExampleCircle from './Components/paper';
 import Paper from 'material-ui/Paper';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import Center from 'react-center'
-import Title from './Title'
-import Bar from './Bar'
+import Title from './Components/Title'
+import Bar from './Components/Bar'
 
 const style = {
       height: 500,
@@ -23,9 +23,9 @@ const style = {
 
 const muiTheme = getMuiTheme({
     palette:{
-       primaryColor1: deepOrange500,
+       primaryColor1: teal900,
        primaryColor2: white,
-       accentColor: orange500
+       accentColor: teal500
     }
 });
 
@@ -40,7 +40,7 @@ class App extends Component {
 	  	    <Center>
             <Paper style={style} zDepth={3} circle={true}>
                 <Title />
-                <h2><Upload style={{margin:200}}/></h2>
+                <h2><Upload style={{margin:0}}/></h2>
             </Paper>
             </Center>
             <div style={{textAlign: 'center'}}>
