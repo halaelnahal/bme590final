@@ -6,6 +6,7 @@
     "@navjobs/upload": "^3.1.2",
     "axios": "^0.17.1",
     "cors-prefetch-middleware": "^1.0.0",
+    "gulp-rename": "^1.2.2",
     "images-upload-middleware": "^1.1.1",
     "material-ui": "^0.20.0",
     "prop-types": "^15.6.0",
@@ -16,6 +17,7 @@
     "react-dropzone-component": "^3.0.0",
     "react-images-uploader": "^1.1.0",
     "react-progress-button": "^5.1.0",
+    "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.17"
   },
   "scripts": {
@@ -23,5 +25,12 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-changed": "^3.1.1",
+    "gulp-clean-css": "^3.9.0",
+    "gulp-sass": "^3.1.0",
+    "gulp-uglify": "^3.0.0"
   }
 }

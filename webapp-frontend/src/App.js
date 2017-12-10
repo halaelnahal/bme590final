@@ -1,4 +1,10 @@
 import React, { Component } from 'react';
+import{
+    BrowserRouter as Router,
+    Route,
+    Link
+} from 'react-router-dom'
+import './Assets/css/default.min.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import darkBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
@@ -11,43 +17,27 @@ import muiThemeable from 'material-ui/styles/muiThemeable';
 import Center from 'react-center'
 import Title from './Components/Title'
 import Bar from './Components/Bar'
+import Header from './Components/Header'
+import HomePage from './Components/homePage'
+import GetStarted from './Components/GetStarted'
 
-const style = {
-      height: 500,
-      width: 500,
-      margin: 40,
-      padding: 60,
-      textAlign: 'center',
-      display: 'inline-block',
-    };
 
-const muiTheme = getMuiTheme({
-    palette:{
-       primaryColor1: teal900,
-       primaryColor2: white,
-       accentColor: teal500
-    }
-});
 
 
 class App extends Component {
-
   render() {
     return (
-	  	<MuiThemeProvider  muiTheme={muiTheme}>
-	  	    <Bar />
-	  	    <div className = "container">
-	  	    <Center>
-            <Paper style={style} zDepth={3} circle={true}>
-                <Title />
-                <h2><Upload style={{margin:0}}/></h2>
-            </Paper>
-            </Center>
-            <div style={{textAlign: 'center'}}>
-            <Prediction />
-            </div>
-            </div>
-		</MuiThemeProvider>
+        <Router>
+        <div className="App">
+
+	  	    <Header />
+
+                <Route exact path='/' component={HomePage} />
+                <Route exact path='/GetStarted' component={GetStarted} />
+
+
+        </div>
+        </Router>
     );
   }
 }
