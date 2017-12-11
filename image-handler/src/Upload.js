@@ -14,9 +14,9 @@ class Upload extends Component {
 	}
 
     parsePrediction = (json_output) => {
-        json_output.data.report_melanoma;
-        console.log(json_output.data.report_melanoma);
-        this.setState({prediction_result: json_output.data.report_melanoma});
+        json_output.data.melanoma_prob;
+        console.log(json_output.data.melanoma_prob);
+        this.setState({prediction_result: json_output.data.melanoma_prob});
     }
 
 
