@@ -5,7 +5,7 @@ class HomePage extends Component {
 		return (
 		    <div className="container-fluid">
 
-				<h1>
+				<h1 style={{margin: '2px'}}>
 					Home
 				</h1>
 

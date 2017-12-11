@@ -31,7 +31,7 @@ class GetStarted extends Component {
 	render() {
 		return (
 		    <div>
-                <h1>
+                <h1 style={{margin: '15px'}}>
 					Get Started
 				</h1>
 
