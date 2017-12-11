@@ -108,7 +108,7 @@ def melanoma_prediction():
         filename = "temp.jpg"
         with open(filename, "wb") as image_out:
             image_out.write(imgdata)
-        img = imread("top.jpg")
+        img = imread(filename)
         if validate(img) is False:
             raise AssertionError
         (labels, predictions) = get_prediction(img)
