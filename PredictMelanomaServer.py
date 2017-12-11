@@ -112,8 +112,10 @@ def melanoma_prediction():
         if validate(img) is False:
             raise AssertionError
         (labels, predictions) = get_prediction(img)
+        report_melanoma = predictions[1]*100
         results = {"type": str(type(img)), "shape": str(img.shape),
-                   "labels": str(labels), "predictions": str(predictions)}
+                   "labels": str(labels), "predictions": str(predictions),
+                   "melanoma_prob": report_melanoma}
 
     except KeyError:
         return send_error("Invalid input. Input dictionary. key: "
