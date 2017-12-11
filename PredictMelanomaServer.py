@@ -56,15 +56,13 @@ def test_base_64():
 
     try:
         b64text = request.json["sample"]
-        text = b64decode(b64text)
-
     except KeyError:
         return send_error("Invalid input. Input JSON dictionary. key: sample"
                           " value: base 64 string", 400)
-
+    try:
+        text = b64decode(b64text)
     except TypeError:
-        return send_error("Cannot decode base 64 string", 400)
-
+        return send_error("Incorrect padding: cannot decode base 64 str", 400)
     except UnicodeDecodeError:
         return send_error("Problem decoding input", 400)
 
@@ -80,16 +78,14 @@ def test_sample():
             output = {"Results": "Received!"}
         else:
             output = {"Results": "Not received."}
-
     except KeyError:
-        return send_error("Invalid input. Input dictionary. key:"
-                          " currentImageString value: image encoded as base 64"
-                          " string", 400)
-
+        return send_error("Invalid key. Input dictionary.\nkey:"
+                          " currentImageString\nvalue: image encoded as base "
+                          "64 string", 400)
     except TypeError:
-        return send_error("Invalid input. Input dictionary. key:"
-                          " currentImageString value: image encoded as base 64"
-                          " string", 400)
+        return send_error("Invalid input. Input dictionary.\nkey:"
+                          " currentImageString\nvalue: image encoded as "
+                          "base 64 string", 400)
 
     return jsonify(output)
 
@@ -102,48 +98,53 @@ def melanoma_prediction():
 
     try:
         raw_string = request.json["currentImageString"]
+    except KeyError:
+        return send_error("Invalid input. Input dictionary.\nkey: "
+                          "currentImageString\nvalue: image encoded as "
+                          "base 64 string", 400)
+    try:
         start_index = raw_string.find(",") + 1
         b64img_string = raw_string[start_index:]
         imgdata = decodestring(b64img_string)
+    except TypeError:
+        return send_error("Incorrect padding: cannot decode base 64 str", 400)
+    except UnicodeDecodeError:
+        return send_error("Problem decoding input", 400)
+
+    try:
         filename = "temp.jpg"
         with open(filename, "wb") as image_out:
             image_out.write(imgdata)
         img = imread(filename)
-        if validate(img) is False:
-            raise AssertionError
-        (labels, predictions) = get_prediction(img)
-        malignant_prob = str(round(predictions[1]*100, 2)) + " %"
-        non_malignant_prob = str(round(predictions[0]*100, 2)) + " %"
-        if predictions[0] > predictions[1]:
-            diagnosis = "Congratulations! You do not have melanoma."
-        elif predictions[0] < predictions[1]:
-            diagnosis = "Uh oh. You should see a doctor to check out this " \
-                        "skin lesion."
-        else:
-            diagnosis = "It is too difficult to tell. Go see a doctor if " \
-                        "you are worried."
-        results = {"type": str(type(img)), "shape": str(img.shape),
-                   "labels": str(labels), "predictions": str(predictions),
-                   "malignant_prob": malignant_prob,
-                   "non_malignant_prob": non_malignant_prob,
-                   "diagnosis": diagnosis}
-
-    except KeyError:
-        return send_error("Invalid input. Input dictionary. key: "
-                          "currentImageString value: image encoded as base 64 "
-                          "string", 400)
-
-    except UnicodeDecodeError:
-        return send_error("Problem decoding input", 400)
-
     except IOError:
         return send_error("Please input base 64 encoded image", 400)
 
+    try:
+        if validate(img) is False:
+            raise AssertionError
     except AssertionError:
         return send_error("Wrong img size. Expected numpy.ndarray of shape "
                           "(x, y, 3)", 500)
-
+    try:
+        (labels, predictions) = get_prediction(img)
+        malignant_prob = str(round(predictions[1]*100, 2)) + " %"
+        non_malignant_prob = str(round(predictions[0]*100, 2)) + " %"
     except ValueError:
         return send_error("get_prediction interrupted by error", 500)
+
+    if predictions[0] > predictions[1]:
+        diagnosis = "Congratulations! You do not have melanoma."
+    elif predictions[0] < predictions[1]:
+        diagnosis = "Uh oh. You should see a doctor to check out this " \
+                    "skin lesion."
+    else:
+        diagnosis = "It is too difficult to tell. Go see a doctor if " \
+                    "you are worried."
+
+    results = {"type": str(type(img)), "shape": str(img.shape),
+               "labels": str(labels), "predictions": str(predictions),
+               "malignant_prob": malignant_prob,
+               "non_malignant_prob": non_malignant_prob,
+               "diagnosis": diagnosis}
 
     return jsonify(results)
