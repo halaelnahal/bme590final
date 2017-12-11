@@ -9,21 +9,23 @@ class Upload extends Component {
 		super();
 		this.state = {
 			currentImageString: '',
+			prediction_result: '',
 		}
 	}
 
     parsePrediction = (json_output) => {
-        json_output["malignant"];
+        json_output.data.report_melanoma;
+        console.log(json_output.data.report_melanoma);
+        this.setState({prediction_result: json_output.data.report_melanoma});
     }
 
 
 	onUpload = (files) => {
 		const reader = new FileReader()
-		const file = files[0]
-		var prediction_result
+		const file = files[0];
+		var prediction_result;
 		reader.readAsDataURL(file);
 		reader.onloadend = () => {
-			console.log(reader.result);
 			this.setState({currentImageString: reader.result});
 			prediction_result = axios.post('http://vcm-1855.vm.duke.edu:8000/melanoma/prediction',this.state).then(this.parsePrediction);
 		}
@@ -40,6 +42,7 @@ class Upload extends Component {
 							height:'200px',
 							textAlign: 'center'}}>
 						Upload here
+						{this.state.prediction_result}
 					</div>
 				</UploadField>
 				<img src={this.state.currentImageString} />
