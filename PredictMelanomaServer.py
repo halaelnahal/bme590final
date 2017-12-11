@@ -112,7 +112,7 @@ def melanoma_prediction():
         if validate(img) is False:
             raise AssertionError
         (labels, predictions) = get_prediction(img)
-        report_melanoma = predictions[1]*100
+        report_melanoma = round(predictions[1]*100, 2)
         results = {"type": str(type(img)), "shape": str(img.shape),
                    "labels": str(labels), "predictions": str(predictions),
                    "melanoma_prob": report_melanoma}
