@@ -1,6 +1,5 @@
 pymodm
 Flask
-python=3.6
 pytest
 pytest-pep8
 pytest-cov
