@@ -114,10 +114,19 @@ def melanoma_prediction():
         (labels, predictions) = get_prediction(img)
         malignant_prob = str(round(predictions[1]*100, 2)) + " %"
         non_malignant_prob = str(round(predictions[0]*100, 2)) + " %"
+        if predictions[0] > predictions[1]:
+            diagnosis = "Congratulations! You do not have melanoma."
+        elif predictions[0] < predictions[1]:
+            diagnosis = "Uh oh. You should see a doctor to check out this " \
+                        "skin lesion."
+        else:
+            diagnosis = "It is too difficult to tell. Go see a doctor if " \
+                        "you are worried."
         results = {"type": str(type(img)), "shape": str(img.shape),
                    "labels": str(labels), "predictions": str(predictions),
                    "malignant_prob": malignant_prob,
-                   "non_malignant_prob": non_malignant_prob}
+                   "non_malignant_prob": non_malignant_prob,
+                   "diagnosis": diagnosis}
 
     except KeyError:
         return send_error("Invalid input. Input dictionary. key: "
