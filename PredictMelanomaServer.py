@@ -112,6 +112,8 @@ def melanoma_prediction():
         if validate(img) is False:
             raise AssertionError
         (labels, predictions) = get_prediction(img)
+        results = {"type": str(type(img)), "shape": str(img.shape),
+                   "labels": str(labels), "predictions": str(predictions)}
 
     except KeyError:
         return send_error("Invalid input. Input dictionary. key: "
@@ -130,8 +132,5 @@ def melanoma_prediction():
 
     except ValueError:
         return send_error("get_prediction interrupted by error", 500)
-
-    results = {"type": str(type(img)), "shape": str(img.shape),
-               "labels": str(labels), "predictions": str(predictions)}
 
     return jsonify(results)
