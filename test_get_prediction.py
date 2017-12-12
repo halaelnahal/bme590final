@@ -1,6 +1,7 @@
 import get_prediction
 import matplotlib.image as mpimg
 
+
 def test_getprediction():
     MALIGNANT_IMAGES = [
         './images/malignant/ISIC_0011285.jpg',
