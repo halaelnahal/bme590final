@@ -10,8 +10,8 @@ import Center from 'react-center'
 import Prediction from './Prediction'
 
 const style = {
-      height: 500,
-      width: 500,
+      height: 700,
+      width: 700,
       margin: 40,
       padding: 60,
       textAlign: 'center',
@@ -40,15 +40,12 @@ class GetStarted extends Component {
             <Center>
              <Paper style={style} zDepth={3} circle={true}>
                  <Title />
-            <h2><Upload style={{margin:0}}/></h2>
+            <div>
+            <h3><Upload /></h3>
+            </div>
             </Paper>
             </Center>
             </div>
-                <div>
-                <Center>
-                <Prediction />
-                </Center>
-                </div>
             </MuiThemeProvider>
             </div>
         )

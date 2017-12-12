@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import DropzoneComponent from 'react-dropzone-component';
 import { UploadField } from '@navjobs/upload';
 import axios from 'axios'
 import ImagesUploader from 'react-images-uploader';
 import 'react-images-uploader/styles.css';
 import 'react-images-uploader/font.css';
-import PropTypes from 'prop-types';
+import {indigo900, redA700, white, red200, red400, red500, teal900, teal500} from 'material-ui/styles/colors';
 
 class Upload extends Component {
 	constructor() {
@@ -40,9 +38,7 @@ class Upload extends Component {
 	render() {
 		return (
 		    <div>
-					{this.state.malignant_prob}
-					{this.state.non_malignant_prob}
-					{this.state.diagnosis}
+				<div>
 		        <UploadField onFiles={this.onUpload}>
                 <ImagesUploader
                     url="http://localhost:9090/notmultiple"
@@ -53,12 +49,25 @@ class Upload extends Component {
                             console.error(err);
                         }
                     }}
-                    label="Upload a picture"
+                    label="Upload Image"
                     />
                     </UploadField>
-				    <img src={this.state.currentImageString} />
+				    <img src={this.state.currentImageString} style={{height: 250, width: 250, margin: 50}}/>
+				</div>
+					<div style={{fontSize:'30px', margin: 100, color: 'red'}}>
+						Malignant:
+					{this.state.malignant_prob}
+					<div style={{fontSize:'30px', margin: 2, color: 'green'}}>
+						Benign:
+					{this.state.non_malignant_prob}
+					</div>
 
-             </div>
+					<div style={{fontSize:'30px', margin: 2, color: 'black'}}>
+					{this.state.diagnosis}
+					</div>
+					</div>
+
+				</div>
         )
 	}
 }
