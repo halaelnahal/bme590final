@@ -31,6 +31,9 @@ req_num = 0
 
 
 def send_error(message, code):
+    """ error reporting function for try/except functionality
+    - Input two arguments: error message, HTTP code
+    - Output json error message, HTTP code """
     err = {
         "error": message
     }
@@ -38,6 +41,9 @@ def send_error(message, code):
 
 
 def validate(img):
+    """ validate correct numpy.ndarray shape for get_prediction function
+        - Input one arguments: image read as numpy.ndarray
+        - Output True/False if the array has shape (x, y, 3) """
     if img.shape[2] == 3:
         return True
     else:
@@ -63,12 +69,15 @@ def test_base_64():
         text = b64decode(b64text)
     except TypeError:
         return send_error("Incorrect padding: cannot decode base 64 str", 400)
-    except UnicodeDecodeError:
-        return send_error("Problem decoding input", 400)
 
     output = {"Results": text}
 
-    return jsonify(output)
+    try:
+        result = jsonify(output)
+    except UnicodeDecodeError:
+        return send_error("Could not jsonify output. Check your input", 400)
+
+    return result
 
 
 @app.route("/sample_image", methods=['POST'])
@@ -102,14 +111,13 @@ def melanoma_prediction():
         return send_error("Invalid input. Input dictionary.\nkey: "
                           "currentImageString\nvalue: image encoded as "
                           "base 64 string", 400)
+
     try:
         start_index = raw_string.find(",") + 1
         b64img_string = raw_string[start_index:]
         imgdata = decodestring(b64img_string)
     except TypeError:
         return send_error("Incorrect padding: cannot decode base 64 str", 400)
-    except UnicodeDecodeError:
-        return send_error("Problem decoding input", 400)
 
     try:
         filename = "temp.jpg"
@@ -125,6 +133,7 @@ def melanoma_prediction():
     except AssertionError:
         return send_error("Wrong img size. Expected numpy.ndarray of shape "
                           "(x, y, 3)", 500)
+
     try:
         (labels, predictions) = get_prediction(img)
         malignant_prob = str(round(predictions[1]*100, 2)) + " %"
@@ -141,10 +150,16 @@ def melanoma_prediction():
         diagnosis = "It is too difficult to tell. Go see a doctor if " \
                     "you are worried."
 
-    results = {"type": str(type(img)), "shape": str(img.shape),
-               "labels": str(labels), "predictions": str(predictions),
+    output = {"type": str(type(img)),
+               "shape": str(img.shape),
+               "labels": str(labels),
+               "predictions": str(predictions),
                "malignant_prob": malignant_prob,
                "non_malignant_prob": non_malignant_prob,
                "diagnosis": diagnosis}
+    try:
+        result = jsonify(output)
+    except UnicodeDecodeError:
+        return send_error("Could not jsonify output. Check your input", 400)
 
-    return jsonify(results)
+    return result
