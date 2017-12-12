@@ -9,7 +9,7 @@ class ContactPage extends Component {
 					Contact Us
 				</h1>
 				<div style={{color: 'red'}}>
-					<h1>Serge Assad: serge.assad@duke.edu</h1>
+					<h1>Serge Assaad: serge.assaad@duke.edu</h1>
 				</div>
 				<div style={{color: 'red'}}>
 					<h1>Joseph Cobb: joseph.cobb@duke.edu</h1>
