@@ -4,7 +4,6 @@ import axios from 'axios'
 import ImagesUploader from 'react-images-uploader';
 import 'react-images-uploader/styles.css';
 import 'react-images-uploader/font.css';
-import {indigo900, redA700, white, red200, red400, red500, teal900, teal500} from 'material-ui/styles/colors';
 
 class Upload extends Component {
 	constructor() {
@@ -54,7 +53,10 @@ class Upload extends Component {
                     </UploadField>
 				    <img src={this.state.currentImageString} style={{height: 250, width: 250, margin: 50}}/>
 				</div>
-					<div style={{fontSize:'30px', margin: 100, color: 'red'}}>
+					<div style={{fontSize:'30px', margin: 100, color: 'black'}}>
+						Diagnosis may take a few seconds to appear...
+
+					<div style={{fontSize:'30px', margin: 15, color: 'red'}}>
 						Malignant:
 					{this.state.malignant_prob}
 					<div style={{fontSize:'30px', margin: 2, color: 'green'}}>
@@ -64,6 +66,7 @@ class Upload extends Component {
 
 					<div style={{fontSize:'30px', margin: 2, color: 'black'}}>
 					{this.state.diagnosis}
+					</div>
 					</div>
 					</div>
 
