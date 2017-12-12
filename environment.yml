@@ -7,3 +7,5 @@ dependencies:
   - ipython
   - Flask
   - tensorflow
+  - matplotlib
+  - Pillow
