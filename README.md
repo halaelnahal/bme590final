@@ -23,3 +23,7 @@ POST routes:
 - /melanoma/get_prediction:
     - input: image transformed into base 64
     - output: melanoma prediction
+
+Code for frontend design was adapted from the following tutorials:
+        -https://www.youtube.com/watch?v=nusgoj74a3Y
+        -https://www.youtube.com/watch?v=Akfp2X5QUXs
