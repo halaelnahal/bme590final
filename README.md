@@ -25,5 +25,6 @@ POST routes:
     - output: melanoma prediction
 
 Code for frontend design was adapted from the following tutorials:
+
         -https://www.youtube.com/watch?v=nusgoj74a3Y
         -https://www.youtube.com/watch?v=Akfp2X5QUXs
