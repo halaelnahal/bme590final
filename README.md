@@ -1,6 +1,8 @@
 # bme590final
 =============
 
+![alt text](https://travis-ci.org/sergeassaad/bme590final.svg?branch=master)
+
 URL: http://vcm-1855.vm.duke.edu:8000
 
 # Routes:
