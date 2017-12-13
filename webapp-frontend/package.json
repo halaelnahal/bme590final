@@ -34,6 +34,5 @@
     "gulp-clean-css": "^3.9.0",
     "gulp-sass": "^3.1.0",
     "gulp-uglify": "^3.0.0"
-  },
-  "homepage": "https://sergeassaad.github.io/bme590final"
+  }
 }
