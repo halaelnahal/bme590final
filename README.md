@@ -1,6 +1,7 @@
 # bme590final
 =============
 
+![alt text](https://travis-ci.org/halaelnahal/bme590final.svg?branch=master)
 
 Deployed Webapp URL: https://halaelnahal.github.io/bme590final
 
