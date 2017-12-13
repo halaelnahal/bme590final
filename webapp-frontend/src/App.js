@@ -26,6 +26,7 @@ class App extends Component {
                 <Route exact path='/ContactPage' component={ContactPage} />
 
 
+
         </div>
         </Router>
     );
