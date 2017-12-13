@@ -1,7 +1,8 @@
 # bme590final
 =============
 
-Deployed Webapp URL: https://sergeassaad.github.io/bme590final
+
+Deployed Webapp URL: https://halaelnahal.github.io/bme590final
 
 URL: http://vcm-1855.vm.duke.edu:8000
 
@@ -27,6 +28,6 @@ POST routes:
     - output: melanoma prediction
 
 Code for frontend design was adapted from the following tutorials:
-
         -https://www.youtube.com/watch?v=nusgoj74a3Y
         -https://www.youtube.com/watch?v=Akfp2X5QUXs
+
